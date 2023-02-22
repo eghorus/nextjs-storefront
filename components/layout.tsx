@@ -29,9 +29,9 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         </div>
         <div className="border-b">
-          <nav className="m-auto flex max-w-page items-center py-4 px-page-content">
-            <Link href="/">
-              <RiMoneyDollarCircleLine className="mr-4 text-3xl text-indigo-900" />
+          <nav className="m-auto flex max-w-page items-center gap-2 py-4 px-page-content">
+            <Link href="/" className="mr-4">
+              <RiMoneyDollarCircleLine className="text-3xl text-indigo-900" />
             </Link>
             <NavLink href="products/clothes">Clothes</NavLink>
             <NavLink href="products/electronics">Electronics</NavLink>
@@ -46,10 +46,14 @@ const Layout = ({ children }: LayoutProps) => {
       </header>
       <main>{children}</main>
       <footer className="border-t bg-indigo-100">
-        <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2 text-sm">
-          <span>© 2023</span>
+        <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2.5 text-sm text-neutral-600">
+          <span className="capitalize">© 2023 nextjs-rtk-storefront</span>
           <span>
-            Thanks to <Link href="https://fakeapi.platzi.com/">PlatziLabs</Link> for their beautiful fake store api
+            Thanks to{" "}
+            <Link href="https://fakeapi.platzi.com/" className="font-semibold">
+              PlatziLabs
+            </Link>{" "}
+            for their beautiful fake store API
           </span>
         </div>
       </footer>

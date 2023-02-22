@@ -1,4 +1,7 @@
 import Head from "next/head";
+import ProductCard from "../components/product-card";
+
+import products from "../data/products.json";
 
 export default function Home() {
   return (
@@ -9,7 +12,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section></section>
+      <section className="m-auto grid max-w-page gap-6 px-page-content py-8 [grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))]">
+        {products.slice(0, 10).map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </section>
     </>
   );
 }
