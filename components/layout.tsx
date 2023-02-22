@@ -1,0 +1,60 @@
+import Link from "next/link";
+import { GiEgyptianBird, GiShoppingBag } from "react-icons/gi";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import NavLink from "./nav-link";
+import NavLinkIcon from "./nav-link-icon";
+
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <div>
+      <header>
+        <div className="bg-indigo-900">
+          <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2 text-sm text-white">
+            <GiEgyptianBird />
+            <p>Get free delivery on orders above $100</p>
+            <div className="[&>*:hover]:bg-transparent [&>*:hover]:text-indigo-200">
+              <NavLink
+                href="/signup"
+                className="relative mr-4 after:absolute after:top-1 after:-right-2 after:inline-block after:h-6 after:border-r after:content-['']"
+              >
+                Create an account
+              </NavLink>
+              <NavLink href="/signin">Sign in</NavLink>
+            </div>
+          </div>
+        </div>
+        <div className="border-b">
+          <nav className="m-auto flex max-w-page items-center py-4 px-page-content">
+            <Link href="/">
+              <RiMoneyDollarCircleLine className="mr-4 text-3xl text-indigo-900" />
+            </Link>
+            <NavLink href="products/clothes">Clothes</NavLink>
+            <NavLink href="products/electronics">Electronics</NavLink>
+            <NavLink href="products/furniture">Furniture</NavLink>
+            <NavLink href="products/shoes">Shoes</NavLink>
+            <div className="ml-auto flex items-center gap-4 rounded text-2xl text-indigo-900">
+              <NavLinkIcon href="/user/wishlist" Icon={IoMdHeartEmpty} count={0} />
+              <NavLinkIcon href="/user/cart" Icon={GiShoppingBag} count={0} />
+            </div>
+          </nav>
+        </div>
+      </header>
+      <main>{children}</main>
+      <footer className="border-t bg-indigo-100">
+        <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2 text-sm">
+          <span>© 2023</span>
+          <span>
+            Thanks to <Link href="https://fakeapi.platzi.com/">PlatziLabs</Link> for their beautiful fake store api
+          </span>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Layout;
