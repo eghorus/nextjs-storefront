@@ -11,7 +11,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <header>
         <div className="bg-indigo-900">
           <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2 text-sm text-white">
@@ -38,13 +38,13 @@ const Layout = ({ children }: LayoutProps) => {
             <NavLink href="products/furniture">Furniture</NavLink>
             <NavLink href="products/shoes">Shoes</NavLink>
             <div className="ml-auto flex items-center gap-4 rounded text-2xl text-indigo-900">
-              <NavLinkIcon href="/user/wishlist" Icon={IoMdHeartEmpty} count={0} />
-              <NavLinkIcon href="/user/cart" Icon={GiShoppingBag} count={0} />
+              <NavLinkIcon href="/wishlist" Icon={IoMdHeartEmpty} count={0} />
+              <NavLinkIcon href="/cart" Icon={GiShoppingBag} count={0} />
             </div>
           </nav>
         </div>
       </header>
-      <main>{children}</main>
+      <main className="m-auto w-full max-w-page grow py-10 px-page-content">{children}</main>
       <footer className="border-t bg-indigo-100">
         <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2.5 text-sm text-neutral-600">
           <span className="capitalize">© 2023 nextjs-rtk-storefront</span>

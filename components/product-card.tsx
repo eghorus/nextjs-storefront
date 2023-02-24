@@ -1,17 +1,10 @@
 import Image from "next/image";
 import { TbHeartPlus, TbShoppingCartPlus } from "react-icons/tb";
+import Product from "../models/product";
 import Button from "./button";
 
 type ProductCardProps = {
-  product: {
-    id: number;
-    title: string;
-    price: number;
-    images: string[];
-    category: {
-      name: string;
-    };
-  };
+  product: Product;
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
