@@ -1,11 +1,12 @@
-import Link from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
 import { GiEgyptianBird, GiShoppingBag } from "react-icons/gi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { ProductsContext } from "../store/productsContext";
 import NavLink from "./nav-link";
 import NavLinkIcon from "./nav-link-icon";
+import Toast from "./toast";
+import { ProductsContext } from "../store/productsContext";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -64,6 +65,7 @@ const Layout = ({ children }: LayoutProps) => {
           </span>
         </div>
       </footer>
+      <Toast />
     </div>
   );
 };

@@ -1,9 +1,10 @@
-import Image from "next/image";
 import { useContext } from "react";
+import Image from "next/image";
 import { TbHeartPlus, TbShoppingCartPlus } from "react-icons/tb";
 import type Product from "../models/product";
-import { ProductsContext } from "../store/productsContext";
 import Button from "./button";
+import { UiContext } from "../store/uiContext";
+import { ProductsContext } from "../store/productsContext";
 
 type ProductCardProps = {
   product: Product;
@@ -18,14 +19,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
     category: { name: categoryName },
   } = product;
 
+  const uiCtx = useContext(UiContext);
+  const { showToast } = uiCtx;
   const productsCtx = useContext(ProductsContext);
   const { addProductToCart, addProductToWishList } = productsCtx;
 
   const handleAddToCart = () => {
     addProductToCart(id);
+    showToast("SUCCESS", "Product added to your cart.");
   };
   const handleAddToWishList = () => {
     addProductToWishList(id);
+    showToast("SUCCESS", "Product added to your wishlist.");
   };
 
   return (

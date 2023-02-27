@@ -1,12 +1,12 @@
 import type Product from "../models/product";
 
-export type InitialState = {
+type InitialState = {
   products: Product[];
   cart: Product[];
   wishList: Product[];
 };
 
-export type DispatchedAction =
+type DispatchedAction =
   | {
       type: "STORE_PRODUCTS";
       payload: { products: Product[] };

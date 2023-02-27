@@ -1,8 +1,7 @@
-import Head from "next/head";
 import { useContext, useEffect } from "react";
+import Head from "next/head";
 import ProductCard from "../components/product-card";
 import { ProductsContext } from "../store/productsContext";
-
 import productsList from "../data/products.json";
 
 export default function Home() {

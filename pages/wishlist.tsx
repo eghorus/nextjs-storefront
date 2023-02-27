@@ -1,5 +1,5 @@
-import Head from "next/head";
 import { useContext } from "react";
+import Head from "next/head";
 import UserProductsList from "../components/user-products-list";
 import { ProductsContext } from "../store/productsContext";
 
