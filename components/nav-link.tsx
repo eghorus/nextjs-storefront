@@ -10,7 +10,7 @@ const NavLink = ({ href, children, className }: NavLinkProps) => {
   return (
     <Link
       href={href}
-      className={`rounded px-2 py-1 font-semibold transition-all hover:bg-indigo-50 hover:text-indigo-900 ${className}`}
+      className={`cursor-not-allowed rounded px-2 py-1 font-semibold transition-all hover:bg-indigo-50 hover:text-indigo-900 ${className}`}
     >
       {children}
     </Link>

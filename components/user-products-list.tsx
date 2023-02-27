@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import type Product from "../models/product";
+import { UiContext } from "../store/uiContext";
 import { ProductsContext } from "../store/productsContext";
 
 type UserProductsListProps = {
@@ -9,6 +10,8 @@ type UserProductsListProps = {
 };
 
 const UserProductsList = ({ isWishList = false, products }: UserProductsListProps) => {
+  const uiCtx = useContext(UiContext);
+  const { showToast } = uiCtx;
   const productsCtx = useContext(ProductsContext);
   const { removeProductFromCart, removeProductFromWishList } = productsCtx;
 
@@ -17,8 +20,10 @@ const UserProductsList = ({ isWishList = false, products }: UserProductsListProp
   const handleRemoveProduct = (productId: number) => {
     if (isWishList) {
       removeProductFromWishList(productId);
+      showToast("SUCCESS", "Product removed from your wishlist.");
     } else {
       removeProductFromCart(productId);
+      showToast("SUCCESS", "Product removed from your cart.");
     }
   };
 

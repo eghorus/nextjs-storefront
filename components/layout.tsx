@@ -6,6 +6,7 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import NavLink from "./nav-link";
 import NavLinkIcon from "./nav-link-icon";
 import Toast from "./toast";
+import { UiContext } from "../store/uiContext";
 import { ProductsContext } from "../store/productsContext";
 
 type LayoutProps = {
@@ -13,6 +14,8 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const uiCtx = useContext(UiContext);
+  const { isToastVisible } = uiCtx;
   const productsCtx = useContext(ProductsContext);
   const { cart, wishList } = productsCtx;
 
@@ -25,14 +28,12 @@ const Layout = ({ children }: LayoutProps) => {
             <p>Get free delivery on orders above $100</p>
             <div className="[&>*:hover]:bg-transparent [&>*:hover]:text-indigo-200">
               <NavLink
-                href="/signup"
-                className="relative mr-4 cursor-not-allowed after:absolute after:top-1 after:-right-2 after:inline-block after:h-6 after:border-r after:content-['']"
+                href="#"
+                className="relative mr-4 after:absolute after:top-1 after:-right-2 after:inline-block after:h-6 after:border-r after:content-['']"
               >
                 Create an account
               </NavLink>
-              <NavLink href="/signin" className="cursor-not-allowed">
-                Sign in
-              </NavLink>
+              <NavLink href="#">Sign in</NavLink>
             </div>
           </div>
         </div>
@@ -41,10 +42,10 @@ const Layout = ({ children }: LayoutProps) => {
             <Link href="/" className="mr-4">
               <RiMoneyDollarCircleLine className="text-3xl text-indigo-900" />
             </Link>
-            <NavLink href="products/clothes">Clothes</NavLink>
-            <NavLink href="products/electronics">Electronics</NavLink>
-            <NavLink href="products/furniture">Furniture</NavLink>
-            <NavLink href="products/shoes">Shoes</NavLink>
+            <NavLink href="#">Clothes</NavLink>
+            <NavLink href="#">Electronics</NavLink>
+            <NavLink href="#">Furniture</NavLink>
+            <NavLink href="#">Shoes</NavLink>
             <div className="ml-auto flex items-center gap-4 rounded text-2xl text-indigo-900">
               <NavLinkIcon href="/wishlist" Icon={IoMdHeartEmpty} count={wishList.length} />
               <NavLinkIcon href="/cart" Icon={GiShoppingBag} count={cart.length} />
@@ -65,7 +66,7 @@ const Layout = ({ children }: LayoutProps) => {
           </span>
         </div>
       </footer>
-      <Toast />
+      {isToastVisible && <Toast />}
     </div>
   );
 };

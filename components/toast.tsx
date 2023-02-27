@@ -3,17 +3,16 @@ import { UiContext } from "../store/uiContext";
 
 const Toast = () => {
   const uiCtx = useContext(UiContext);
-  const { isToastVisible, toastType, toastMessage, hideToast } = uiCtx;
+  const { toastType, toastMessage, hideToast } = uiCtx;
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       hideToast();
-    }, 4000);
+    }, 2000);
+    console.log(timerId);
 
     return () => clearTimeout(timerId);
-  }, [hideToast]);
-
-  if (!isToastVisible) return null;
+  }, []);
 
   return (
     <div
