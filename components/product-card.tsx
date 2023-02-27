@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useContext } from "react";
 import { TbHeartPlus, TbShoppingCartPlus } from "react-icons/tb";
-import Product from "../models/product";
+import type Product from "../models/product";
+import { ProductsContext } from "../store/productsContext";
 import Button from "./button";
 
 type ProductCardProps = {
@@ -9,11 +11,22 @@ type ProductCardProps = {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const {
+    id,
     title,
     price,
     images,
     category: { name: categoryName },
   } = product;
+
+  const productsCtx = useContext(ProductsContext);
+  const { addProductToCart, addProductToWishList } = productsCtx;
+
+  const handleAddToCart = () => {
+    addProductToCart(id);
+  };
+  const handleAddToWishList = () => {
+    addProductToWishList(id);
+  };
 
   return (
     <div className="group overflow-hidden rounded bg-slate-100 shadow-sm transition-all hover:shadow">
@@ -26,10 +39,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <span className="font-semibold text-indigo-600">${price.toLocaleString("en-US")}</span>
       </div>
       <div className="mt-2 mb-6 flex items-center justify-center gap-4 px-4 [&>*]:grow">
-        <Button variant="primary" onClick={() => console.log(title)}>
+        <Button variant="primary" onClick={handleAddToCart}>
           <TbShoppingCartPlus className="text-lg" /> Cart
         </Button>
-        <Button variant="secondary" onClick={() => console.log(title)}>
+        <Button variant="secondary" onClick={handleAddToWishList}>
           <TbHeartPlus className="text-lg" /> WishList
         </Button>
       </div>

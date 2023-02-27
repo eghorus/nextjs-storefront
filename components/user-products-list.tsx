@@ -1,5 +1,7 @@
 import Image from "next/image";
-import Product from "../models/product";
+import { useContext } from "react";
+import type Product from "../models/product";
+import { ProductsContext } from "../store/productsContext";
 
 type UserProductsListProps = {
   products: Product[];
@@ -7,13 +9,23 @@ type UserProductsListProps = {
 };
 
 const UserProductsList = ({ isWishList = false, products }: UserProductsListProps) => {
+  const productsCtx = useContext(ProductsContext);
+  const { removeProductFromCart, removeProductFromWishList } = productsCtx;
+
   let subtotal = products.reduce((total, current) => (total += +current.price), 0);
+
+  const handleRemoveProduct = (productId: number) => {
+    if (isWishList) {
+      removeProductFromWishList(productId);
+    } else {
+      removeProductFromCart(productId);
+    }
+  };
 
   return (
     <div className="m-auto mb-5 max-w-xl">
       <ul className="mb-5 flex flex-col divide-y border-y">
-        {/* TODO: remove slice */}
-        {products.slice(0, 5).map(({ id, title, price, images, category: { name: categoryName } }) => (
+        {products.map(({ id, title, price, images, category: { name: categoryName } }) => (
           <li key={id} className="flex gap-5 py-5">
             <div className="relative h-24 w-32 overflow-hidden rounded-sm">
               <Image src={images[0]} alt={title} fill className="object-cover" />
@@ -27,6 +39,7 @@ const UserProductsList = ({ isWishList = false, products }: UserProductsListProp
               <button
                 type="button"
                 className="text-sm font-semibold text-indigo-600 transition-all hover:text-indigo-700 hover:underline"
+                onClick={handleRemoveProduct.bind(this, id)}
               >
                 Remove
               </button>
@@ -43,7 +56,7 @@ const UserProductsList = ({ isWishList = false, products }: UserProductsListProp
           <p className="mb-10 text-neutral-400">Shipping and taxes will be calculated at checkout.</p>
           <button
             type="button"
-            className="m-auto block w-full max-w-sm rounded-md bg-indigo-600 px-4 py-2 font-semibold text-white transition-all hover:bg-indigo-700"
+            className="m-auto block w-full max-w-sm cursor-not-allowed rounded-md bg-indigo-600 px-4 py-2 font-semibold text-white transition-all hover:bg-indigo-700"
           >
             Checkout
           </button>

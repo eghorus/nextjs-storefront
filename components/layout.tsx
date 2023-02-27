@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { useContext } from "react";
 import { GiEgyptianBird, GiShoppingBag } from "react-icons/gi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { ProductsContext } from "../store/productsContext";
 import NavLink from "./nav-link";
 import NavLinkIcon from "./nav-link-icon";
 
@@ -10,6 +12,9 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const productsCtx = useContext(ProductsContext);
+  const { cart, wishList } = productsCtx;
+
   return (
     <div className="flex h-full flex-col">
       <header>
@@ -20,11 +25,13 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="[&>*:hover]:bg-transparent [&>*:hover]:text-indigo-200">
               <NavLink
                 href="/signup"
-                className="relative mr-4 after:absolute after:top-1 after:-right-2 after:inline-block after:h-6 after:border-r after:content-['']"
+                className="relative mr-4 cursor-not-allowed after:absolute after:top-1 after:-right-2 after:inline-block after:h-6 after:border-r after:content-['']"
               >
                 Create an account
               </NavLink>
-              <NavLink href="/signin">Sign in</NavLink>
+              <NavLink href="/signin" className="cursor-not-allowed">
+                Sign in
+              </NavLink>
             </div>
           </div>
         </div>
@@ -38,8 +45,8 @@ const Layout = ({ children }: LayoutProps) => {
             <NavLink href="products/furniture">Furniture</NavLink>
             <NavLink href="products/shoes">Shoes</NavLink>
             <div className="ml-auto flex items-center gap-4 rounded text-2xl text-indigo-900">
-              <NavLinkIcon href="/wishlist" Icon={IoMdHeartEmpty} count={0} />
-              <NavLinkIcon href="/cart" Icon={GiShoppingBag} count={0} />
+              <NavLinkIcon href="/wishlist" Icon={IoMdHeartEmpty} count={wishList.length} />
+              <NavLinkIcon href="/cart" Icon={GiShoppingBag} count={cart.length} />
             </div>
           </nav>
         </div>
@@ -47,7 +54,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="m-auto w-full max-w-page grow py-10 px-page-content">{children}</main>
       <footer className="border-t bg-indigo-100">
         <div className="m-auto flex max-w-page items-center justify-between px-page-content py-2.5 text-sm text-neutral-600">
-          <span className="capitalize">© 2023 nextjs-rtk-storefront</span>
+          <span className="capitalize">© 2023 nextjs-storefront</span>
           <span>
             Thanks to{" "}
             <Link href="https://fakeapi.platzi.com/" className="font-semibold">
